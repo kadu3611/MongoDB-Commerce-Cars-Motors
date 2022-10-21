@@ -27,4 +27,18 @@ export default class CarsController {
     
     return res.status(200).json(results);
   }
+
+  public async readOne(
+    req: Request,
+
+    res: Response<ICar | null>,
+  ) { 
+    const { id } = req.params;
+    console.log(id);
+    
+    const results = await this._service.readOne(id);
+    console.log(results, 'results controller');
+    
+    return res.status(200).json(results);
+  }
 }

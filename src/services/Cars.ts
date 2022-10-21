@@ -1,6 +1,7 @@
 import { Car, ICar } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
 import IService from '../interfaces/IService';
+import { ErrorTypes } from '../errors/catalog';
 
 export default class CarsService implements IService<ICar> {
   // quando fazemos IService<IFrame> acima 
@@ -24,5 +25,13 @@ export default class CarsService implements IService<ICar> {
   public async read(): Promise<ICar[]> {
     const cars = await this._cars.read();
     return cars;
+  }
+
+  public async readOne(_id:string):Promise<ICar | null> {
+    const car = await this._cars.readOne(_id);
+    console.log(car, 'car');
+    
+    if (!car) throw new Error(ErrorTypes.EntityNotFound);
+    return car;
   }
 }
