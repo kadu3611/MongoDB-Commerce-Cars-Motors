@@ -15,4 +15,5 @@ export default ICar;
 
 export {
   ICar,
+  Car,
 };
