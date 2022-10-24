@@ -1,6 +1,7 @@
 import { isValidObjectId, Model } from 'mongoose';
 import { IModel } from '../interfaces/IModel';
 import { ErrorTypes } from '../errors/catalog';
+import { CarZodSchema } from '../interfaces/ICar';
 
 export default abstract class MongoModel<T> implements IModel<T> {
   // atributos...
@@ -23,12 +24,24 @@ export default abstract class MongoModel<T> implements IModel<T> {
     if (!isValidObjectId(_id)) throw new Error(ErrorTypes.InvalidMongoId);
 
     const results = await this._model.findOne({ _id });
-    console.log(results, 'results');
     
     return results;
   }
 
-//   public async create(obj:T):Promise<T> {
-//     return this._model.create({ ...obj });
-//   }
+  public async update(_id: string, object: T): Promise<T | null> {
+    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.InvalidMongoId);
+    const parser = CarZodSchema.safeParse(
+      { ...object },
+    );
+    if (!parser.success) {
+      throw parser.error;
+    }
+    const teste = await this._model.updateOne({ _id }, parser.data);
+    console.log(teste);
+    
+    const resultsFind = await this._model.findOne(
+      { _id },
+    );
+    return resultsFind;
+  }
 }

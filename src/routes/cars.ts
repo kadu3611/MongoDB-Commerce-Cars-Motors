@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import CarModel from '../models/Cars';
-import CarService from '../services/Cars';
-import CarController from '../controllers/Car';
+import CarModel from '../models/CarsModels';
+import CarService from '../services/CarsService';
+import CarController from '../controllers/CarController';
 
 const route = Router();
 
@@ -12,5 +12,6 @@ const carController = new CarController(carService);
 route.post('/cars', (req, res) => carController.create(req, res));
 route.get('/cars', (req, res) => carController.read(req, res));
 route.get('/cars/:id', (req, res) => carController.readOne(req, res));
+route.put('/cars/:id', (req, res) => carController.update(req, res));
 
 export default route;
