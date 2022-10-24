@@ -36,12 +36,16 @@ export default abstract class MongoModel<T> implements IModel<T> {
     if (!parser.success) {
       throw parser.error;
     }
-    const teste = await this._model.updateOne({ _id }, parser.data);
-    console.log(teste);
-    
+    await this._model.updateOne({ _id }, parser.data);
     const resultsFind = await this._model.findOne(
       { _id },
     );
     return resultsFind;
+  }
+
+  public async delete(_id: string): Promise<T | null> {
+    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.InvalidMongoId);
+
+    return this._model.findByIdAndDelete({ _id });
   }
 }

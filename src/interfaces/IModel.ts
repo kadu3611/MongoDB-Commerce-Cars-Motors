@@ -8,7 +8,7 @@ export default interface IModel<T> {
   // //  deve receber uma string e retornar uma Promise do tipo T ou nula.
   update(_id: string, object: T):Promise<T | null>,
   // //  deve receber uma string e um objeto do tipo T e retornar uma Promise do tipo T ou nula.
-  // delete(name: string): Promise<T | null>,
+  delete(_id: string): Promise<T | null>,
   // //  deve receber uma string e retornar uma Promise do tipo T ou nula.
 
 }
