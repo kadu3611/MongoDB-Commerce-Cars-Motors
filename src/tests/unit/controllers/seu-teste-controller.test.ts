@@ -7,7 +7,7 @@ import CarService from '../../../services/CarsService';
 import CarSchema from "../../../models/CarsModels"
 
 
-describe('Frame Controller', () => {
+describe('Car Controller', () => {
   const carModel = new CarSchema()
   const carService = new CarService(carModel);
   const carController = new CarController(carService);
@@ -17,6 +17,8 @@ describe('Frame Controller', () => {
   before(() => {
     sinon.stub(carService, 'create').resolves(carMockCreate);
     sinon.stub(carService, 'readOne').resolves(carMockCreate);
+    sinon.stub(carService, 'read').resolves([carMockCreate]);
+
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -26,7 +28,7 @@ describe('Frame Controller', () => {
     sinon.restore()
   })
 
-  describe('Create Frame', () => {
+  describe('Create Car', () => {
     it('Success', async () => {
       req.body = carMockCreate;
       await carController.create(req, res);
@@ -35,13 +37,22 @@ describe('Frame Controller', () => {
     });
   });
 
-  describe('ReadOne Frame', () => {
+  describe('ReadOne Car', () => {
     it('Success', async () => {
       req.params = { id: carMoksResults._id };
       await carController.readOne(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(carMockCreate)).to.be.true;
+    });
+  });
+
+  describe('Read Car', () => {
+    it('Success', async () => {
+      await carController.read(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith([carMockCreate])).to.be.true;
     });
   });
 });

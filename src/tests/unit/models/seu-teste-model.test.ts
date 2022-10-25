@@ -50,25 +50,21 @@ describe(' Card Controller', () => {
 
 
 		});
-        // it('_id not found', async () => {
-		// 	try {
-		// 		await carModel.readOne('123ERRADO');
-		// 	} catch (error: any) {
-		// 		expect(error.message).to.be.eq('InvalidMongoId');
-		// 	}
-		// });
+        it('_id not found', async () => {
+			try {
+				await carModel.readOne('123ERRADO');
+			} catch (error: any) {
+				expect(error.message).to.be.eq('InvalidMongoId');
+			}
+		});
 });
 
-});
-
-
-
-//     describe('searching all car', () => {
-//     it('successfully found', async () => {7
-//         const newCar = await carModel.create(carMockCreate);
-//         const [allCar] = await carModel.read();
+    describe('searching all car', () => {
+    it('successfully found', async () => {7
+        const newCar = await carModel.create(carMockCreate);
+        const [allCar] = await carModel.read();
         
-//         expect(allCar).to.be.deep.equal(newCar);
-//     });
-// });
-// });
+        expect(allCar).to.be.deep.equal(newCar);
+    });
+});
+});
