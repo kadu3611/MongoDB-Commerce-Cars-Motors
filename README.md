@@ -5,7 +5,7 @@ Esse projeto é uma API RESTfull na qual utiliza arquitetura MSC(model, Service,
 # Sumário
 - [Bem vindo ao Car Shop Project!](#bem-vindo-ao-car-shop-project)
 - [Sumário](#sumário)
-- [Tecnologias, bibliotecas e arquiteturas usadas](#tecnologias-bibliotecas-e-arquiteturas-usadas)
+- [Tecnologias, bibliotecas e arquiteturas usadas]
 - [Instruções da aplicação](#instruções-da-aplicação)
 
 # Tecnologias, bibliotecas e arquiteturas usadas
